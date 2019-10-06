@@ -49,6 +49,11 @@ public class StepDefATM {
         atm.withdraw(amount);
     }
 
+    @When("I deposit (.*) from ATM")
+    public void i_deposit_from_atm(double money) {
+        atm.deposit(money);
+    }
+
     @When("I overdraw (.*) from ATM")
     public void i_withdraw_from_atm_more_than_balance(double amount) throws NotEnoughBalanceException {
         assertThrows(NotEnoughBalanceException.class,
@@ -67,7 +72,7 @@ public class StepDefATM {
     @Then("customer id (\\d+) account balance is (.*)")
     public void customer_id_account_balance_is(int id, double balance) {
         assertEquals(balance,
-                     bank.findCustomer(id).getAccount().getBalance());
+                bank.findCustomer(id).getAccount().getBalance());
     }
 
 }
